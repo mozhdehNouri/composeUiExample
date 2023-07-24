@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
+import com.example.composeuiexample.screen.first.FirstScreen
 import com.example.composeuiexample.ui.theme.ComposeUiExampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,11 +16,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeUiExampleTheme {
-                // A surface container using the 'background' color from the theme
+                // This app draws behind the system bars, so we want to handle fitting system windows
+                WindowCompat.setDecorFitsSystemWindows(window, false)
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                    color = MaterialTheme.colors.background) {
+
+
+                    FirstScreen()
 
                 }
             }
