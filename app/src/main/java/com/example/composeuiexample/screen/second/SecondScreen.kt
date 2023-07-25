@@ -1,6 +1,7 @@
 package com.example.composeuiexample.screen.second
 
-import android.content.res.Configuration.UI_MODE_TYPE_CAR
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composeuiexample.components.UiSampleScaffold
+import com.example.composeuiexample.ui.theme.ComposeUiExampleTheme
 import com.example.composeuiexample.utils.mirroringIcon
 
 @Composable
@@ -39,27 +41,36 @@ fun SecondScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun ContentScreen(modifier: Modifier = Modifier) {
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(20.dp)
+            .padding(5.dp)
     ) {
-        Text(
-            text = "Last week",
-            modifier.weight(1f),
-            textAlign = TextAlign.Start, color = Color.Gray
-        )
-        Text(
-            text = "2 trips",
-            modifier.weight(1f),
-            textAlign = TextAlign.End,
-            color = Color.Gray
-        )
-    }
-    LazyColumn {
-        items()
-    }
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
 
+        ) {
+            Text(
+                text = "Last week",
+                modifier.weight(1f),
+                textAlign = TextAlign.Start
+            )
+            Text(
+                text = "2 trips",
+                modifier.weight(1f),
+                textAlign = TextAlign.End,
+            )
+        }
+        LazyColumn(
+            modifier.padding(top = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            items(7) {
+                SecondSListItem()
+            }
+        }
+    }
 }
 
 
@@ -89,7 +100,6 @@ fun SecondScreenToolbar(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             textDecoration = TextDecoration.LineThrough,
             style = MaterialTheme.typography.h6,
-            color = Color.Gray
         )
 
         IconButton(
@@ -99,15 +109,16 @@ fun SecondScreenToolbar(modifier: Modifier = Modifier) {
             Icon(
                 imageVector = Icons.Outlined.FileCopy,
                 contentDescription = "",
-                tint = Color.Gray
             )
         }
 
     }
 }
 
-@Preview(uiMode = UI_MODE_TYPE_CAR, showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun Preview() {
-    SecondScreen()
+    ComposeUiExampleTheme {
+        SecondScreen()
+    }
 }
